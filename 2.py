@@ -65,6 +65,9 @@ def define_model():
 	model = Sequential()
 	model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))
 	model.add(MaxPooling2D((2, 2)))
+	model.add(Conv2D(32, (3, 3), activation='relu'))
+	model.add(Conv2D(32, (3, 3), activation='relu'))
+	model.add(MaxPooling2D((2, 2)))  
 	model.add(Flatten())
 	model.add(Dense(10, activation='softmax'))
  
@@ -109,10 +112,10 @@ def run_test_harness():
 	trainX, testX = prep_pixels(trainX, testX)
  
 	# add random noise to image data
-	trainX, testX = add_random_noise(trainX, testX, 0.4)
+	trainXNoisy, testXNoisy = add_random_noise(trainX, testX, 0.45)
 
   # evaluate model
-	evaluate_model(trainX, trainY)
+	evaluate_model(trainXNoisy, trainY)
 
 # entry point, run the test harness
 run_test_harness()
